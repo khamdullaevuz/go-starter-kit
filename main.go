@@ -1,7 +1,7 @@
 package main
 
 import (
-	"api-gateway/router"
+	"go-starter-kit/router"
 )
 
 func main(){

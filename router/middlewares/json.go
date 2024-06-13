@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"api-gateway/models"
-	"api-gateway/utils"
+	"go-starter-kit/models"
+	"go-starter-kit/utils"
 )
 
 func JsonMiddleware() gin.HandlerFunc {

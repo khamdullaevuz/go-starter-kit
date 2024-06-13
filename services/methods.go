@@ -1,8 +1,8 @@
 package services
 
 import (
-	"api-gateway/models"
-	"api-gateway/utils"
+	"go-starter-kit/models"
+	"go-starter-kit/utils"
 )
 
 type MethodService struct {}

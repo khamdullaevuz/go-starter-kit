@@ -1,9 +1,9 @@
 package router
 
 import (
-	"api-gateway/models"
-	"api-gateway/router/middlewares"
-	"api-gateway/services"
+	"go-starter-kit/models"
+	"go-starter-kit/router/middlewares"
+	"go-starter-kit/services"
 
 	"github.com/gin-gonic/gin"
 )

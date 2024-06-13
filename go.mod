@@ -1,4 +1,4 @@
-module api-gateway
+module go-starter-kit
 
 go 1.16
 

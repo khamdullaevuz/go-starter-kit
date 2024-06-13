@@ -1,6 +1,6 @@
 package utils
 
-import "api-gateway/models"
+import "go-starter-kit/models"
 
 func NewError(message string) (Error models.Error){
 	return models.Error{
