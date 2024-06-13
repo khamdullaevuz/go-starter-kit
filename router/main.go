@@ -2,9 +2,8 @@ package router
 
 import (
 	"api-gateway/models"
+	"api-gateway/router/middlewares"
 	"api-gateway/services"
-	"encoding/json"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,21 +11,13 @@ import (
 func Init() *gin.Engine {
 	router := gin.Default()
 
+	router.Use(middlewares.JsonMiddleware())
+
 	router.GET("/services", func(c *gin.Context) {
-		jsonData, err := c.GetRawData()
-		if err != nil {
-			c.JSON(400, gin.H{
-				"message": fmt.Sprintf("Error: %v", err),
-			})
-		}
-
-		request := models.Request{}
-
-		json.Unmarshal(jsonData, &request)
 		
 		service := services.NewMethodService()
 
-		serviceResponse, methodErr := service.SwitchMethods(request)
+		serviceResponse, methodErr := service.SwitchMethods(c.MustGet("request").(models.Request))
 
 		if methodErr.HttpStatus != 0 {
 			c.JSON(methodErr.HttpStatus, gin.H{
