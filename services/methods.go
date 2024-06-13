@@ -12,11 +12,13 @@ func NewMethodService() MethodService {
 }
 
 func (service MethodService) SwitchMethods (request models.Request) (interface{}, interface{}){
-	switch request.Method {
-		case "SayHello":
-			return SayHello(request)
-		case "SayBye":
-			return SayBye(request)
+	routes := map[string]func(models.Request) (models.Response, interface{}){
+		"say.hello": SayHello,
+		"say.bye": SayBye,
+	}
+
+	if method, ok := routes[request.Method]; ok {
+		return method(request)
 	}
 
 	return nil, utils.NewError("Method not found", request)
