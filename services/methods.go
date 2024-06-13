@@ -19,7 +19,7 @@ func (service MethodService) SwitchMethods (request models.Request) (interface{}
 			return SayGoodbye(request)
 	}
 
-	return nil, utils.NewError("Method not found")
+	return nil, utils.NewError("Method not found", request)
 }
 
 func SayHello(params models.Request) (models.Response, models.Error){

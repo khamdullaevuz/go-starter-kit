@@ -2,10 +2,10 @@ package utils
 
 import "go-starter-kit/models"
 
-func NewError(message string) (Error models.Error){
+func NewError(message string, request models.Request) (Error models.Error){
 	return models.Error{
-		Jsonrpc: "2.0",
-		Id: 0,
+		Jsonrpc: request.Jsonrpc,
+		Id: request.Id,
 		Status: false,
 		Message: message,
 	}

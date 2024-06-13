@@ -17,7 +17,7 @@ func JsonMiddleware() gin.HandlerFunc {
 		data, err := c.GetRawData()
 
 		if err != nil {
-			c.JSON(400, utils.NewError(fmt.Sprintf("Invalid request: %s", err.Error())))
+			c.JSON(400, utils.NewError(fmt.Sprintf("Invalid request: %s", err.Error()), request))
 			c.Abort()
 			return
 		}
@@ -25,20 +25,20 @@ func JsonMiddleware() gin.HandlerFunc {
 		json.Unmarshal(data, &request)
 
 		if request.Jsonrpc != "2.0" {
-			c.JSON(400, utils.NewError("Invalid JSON-RPC version"))
+			c.JSON(400, utils.NewError("Invalid JSON-RPC version", request))
 			c.Abort()
 			return
 		}
 
 		if request.Id == 0 {
-			c.JSON(422, utils.NewError("Invalid request id"))
+			c.JSON(422, utils.NewError("Invalid request id", request))
 			c.Abort()
 			return
 		}
 
 		if request.Method == "" {
 			
-			c.JSON(404, utils.NewError("Method Not Found"))
+			c.JSON(404, utils.NewError("Method Not Found", request))
 			c.Abort()
 			return
 		}
