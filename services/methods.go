@@ -11,7 +11,7 @@ func NewMethodService() MethodService {
 	return MethodService{}
 }
 
-func (service MethodService) SwitchMethods (request models.Request) (interface{}, models.Error){
+func (service MethodService) SwitchMethods (request models.Request) (interface{}, interface{}){
 	switch request.Method {
 		case "SayHello":
 			return SayHello(request)
@@ -22,26 +22,16 @@ func (service MethodService) SwitchMethods (request models.Request) (interface{}
 	return nil, utils.NewError("Method not found", request)
 }
 
-func SayHello(params models.Request) (models.Response, models.Error){
-	return models.Response{
-		Jsonrpc: "2.0",
-		Id: params.Id,
-		Status: true,
-		Data: map[string]interface{}{
+func SayHello(params models.Request) (models.Response, interface{}){
+	return utils.NewResponse(map[string]interface{}{
 			"message": "Hello",
 			"params": params.Params,
-		},
-	}, models.Error{}
+		}, params), nil
 }
 
-func SayBye(params models.Request) (models.Response, models.Error){
-	return models.Response{
-		Jsonrpc: "2.0",
-		Id: params.Id,
-		Status: true,
-		Data: map[string]interface{}{
+func SayBye(params models.Request) (models.Response, interface{}){
+	return utils.NewResponse(map[string]interface{}{
 			"message": "Good Bye",
 			"params": params.Params,
-		},
-	}, models.Error{}
+		}, params), nil
 }
