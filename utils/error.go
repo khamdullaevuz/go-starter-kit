@@ -7,6 +7,6 @@ func NewError(message string, request models.Request) (Error models.Error){
 		Jsonrpc: request.Jsonrpc,
 		Id: request.Id,
 		Status: false,
-		Message: message,
+		Error: message,
 	}
 }

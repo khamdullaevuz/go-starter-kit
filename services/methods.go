@@ -27,8 +27,10 @@ func SayHello(params models.Request) (models.Response, models.Error){
 		Jsonrpc: "2.0",
 		Id: params.Id,
 		Status: true,
-		Message: "Hello",
-		Data: params.Params,
+		Data: map[string]interface{}{
+			"message": "Hello",
+			"params": params.Params,
+		},
 	}, models.Error{}
 }
 
@@ -37,7 +39,9 @@ func SayGoodbye(params models.Request) (models.Response, models.Error){
 		Jsonrpc: "2.0",
 		Id: params.Id,
 		Status: true,
-		Message: "Good Bye",
-		Data: params.Params,
+		Data: map[string]interface{}{
+			"message": "Good Bye",
+			"params": params.Params,
+		},
 	}, models.Error{}
 }
