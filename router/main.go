@@ -19,10 +19,8 @@ func Init() *gin.Engine {
 
 		serviceResponse, methodErr := service.SwitchMethods(c.MustGet("request").(models.Request))
 
-		if methodErr.HttpStatus != 0 {
-			c.JSON(methodErr.HttpStatus, gin.H{
-				"message": methodErr.Data,
-			})
+		if serviceResponse == nil{
+			c.JSON(400, methodErr)
 		}else{
 			c.JSON(200, serviceResponse)
 		}

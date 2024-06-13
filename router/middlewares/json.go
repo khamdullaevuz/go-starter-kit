@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"api-gateway/models"
+	"api-gateway/utils"
 )
 
 func JsonMiddleware() gin.HandlerFunc {
@@ -16,39 +17,34 @@ func JsonMiddleware() gin.HandlerFunc {
 		data, err := c.GetRawData()
 
 		if err != nil {
-			c.JSON(400, gin.H{
-				"message": fmt.Sprintf("Error: %v", err),
-			})
+			c.JSON(400, utils.NewError(fmt.Sprintf("Invalid request: %s", err.Error())))
+			c.Abort()
+			return
 		}
 
 		json.Unmarshal(data, &request)
 
 		if request.Jsonrpc != "2.0" {
-			c.JSON(400, gin.H{
-				"message": "Invalid JSON-RPC version",
-			})
+			c.JSON(400, utils.NewError("Invalid JSON-RPC version"))
 			c.Abort()
 			return
 		}
 
 		if request.Id == 0 {
-			c.JSON(400, gin.H{
-				"message": "Invalid request ID",
-			})
+			c.JSON(422, utils.NewError("Invalid request id version"))
 			c.Abort()
 			return
 		}
 
 		if request.Method == "" {
-			c.JSON(400, gin.H{
-				"message": "Invalid method",
-			})
+			
+			c.JSON(404, utils.NewError("Method Not Found"))
 			c.Abort()
 			return
 		}
 
 		c.Set("request", request)
-		
+
 		c.Next()
 	}
 }

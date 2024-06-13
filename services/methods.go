@@ -2,6 +2,7 @@ package services
 
 import (
 	"api-gateway/models"
+	"api-gateway/utils"
 )
 
 type MethodService struct {}
@@ -18,17 +19,14 @@ func (service MethodService) SwitchMethods (request models.Request) (interface{}
 			return SayGoodbye(request)
 	}
 
-	return nil, models.Error{
-		HttpStatus: 404,
-		Data: "Method not found",
-	}
+	return nil, utils.NewError("Method not found")
 }
 
 func SayHello(params models.Request) (models.Response, models.Error){
 	return models.Response{
 		Jsonrpc: "2.0",
 		Id: params.Id,
-		Status: "success",
+		Status: true,
 		Message: "Hello",
 		Data: params.Params,
 	}, models.Error{}
@@ -38,7 +36,7 @@ func SayGoodbye(params models.Request) (models.Response, models.Error){
 	return models.Response{
 		Jsonrpc: "2.0",
 		Id: params.Id,
-		Status: "success",
+		Status: true,
 		Message: "Good Bye",
 		Data: params.Params,
 	}, models.Error{}
