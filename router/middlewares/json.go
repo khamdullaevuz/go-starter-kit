@@ -31,7 +31,7 @@ func JsonMiddleware() gin.HandlerFunc {
 		}
 
 		if request.Id == 0 {
-			c.JSON(422, utils.NewError("Invalid request id version"))
+			c.JSON(422, utils.NewError("Invalid request id"))
 			c.Abort()
 			return
 		}
