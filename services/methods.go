@@ -22,16 +22,16 @@ func (service MethodService) SwitchMethods (request models.Request) (interface{}
 	return nil, utils.NewError("Method not found", request)
 }
 
-func SayHello(params models.Request) (models.Response, interface{}){
+func SayHello(request models.Request) (models.Response, interface{}){
 	return utils.NewResponse(map[string]interface{}{
 			"message": "Hello",
-			"params": params.Params,
-		}, params), nil
+			"params": request.Params,
+		}, request), nil
 }
 
-func SayBye(params models.Request) (models.Response, interface{}){
+func SayBye(request models.Request) (models.Response, interface{}){
 	return utils.NewResponse(map[string]interface{}{
 			"message": "Good Bye",
-			"params": params.Params,
-		}, params), nil
+			"params": request.Params,
+		}, request), nil
 }
