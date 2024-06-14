@@ -22,7 +22,7 @@ func JsonMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		json.Unmarshal(data, &request)
+		_ = json.Unmarshal(data, &request)
 
 		if request.JsonRpc != "2.0" {
 			c.JSON(400, utils.NewError("Invalid JSON-RPC version", request))
