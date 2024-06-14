@@ -28,7 +28,7 @@ func JsonMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		if request.Jsonrpc != "2.0" {
+		if request.JsonRpc != "2.0" {
 			c.JSON(400, utils.NewError("Invalid JSON-RPC version", request))
 			c.Abort()
 			return
