@@ -17,16 +17,11 @@ func Init() *gin.Engine {
 		v1.GET("/services", func(c *gin.Context) {
 			service := services.NewMethodService()
 
-			response, err := service.SwitchMethods(
+			response := service.SwitchMethods(
 				c.MustGet("request").(models.Request),
 			)
 
-			if err != nil {
-				c.JSON(400, err)
-			} else {
-				c.JSON(200, response)
-			}
-
+			c.JSON(200, response)
 		})
 	}
 
