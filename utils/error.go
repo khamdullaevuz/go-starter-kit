@@ -15,7 +15,7 @@ func NewError(error models.Error, request models.Request) (Error models.Response
 func ErrorContent(message string, code int, data interface{}) models.Error {
 	return models.Error{
 		Code:    code,
-		Message: message,
 		Data:    data,
+		Message: message,
 	}
 }
