@@ -4,8 +4,11 @@ import (
 	"go-starter-kit/router"
 )
 
-func main(){
+func main() {
 	r := router.Init()
 
-	r.Run(":8080")
+	err := r.Run(":8080")
+	if err != nil {
+		return
+	}
 }
