@@ -1,7 +1,7 @@
 package services
 
 import (
-	say "go-starter-kit/controllers"
+	"go-starter-kit/controllers"
 	"go-starter-kit/models"
 	"go-starter-kit/utils"
 )
@@ -14,8 +14,9 @@ func NewMethodService() MethodService {
 
 func (service MethodService) SwitchMethods(request models.Request) models.Response {
 	routes := map[string]func(models.Request) models.Response{
-		"say.hello": say.Hello,
-		"say.bye":   say.Bye,
+		"say.hello": controllers.SayController{}.Hello,
+		"say.bye":   controllers.SayController{}.Bye,
+		"user.list": controllers.UserController{}.List,
 	}
 
 	if method, ok := routes[request.Method]; ok {
